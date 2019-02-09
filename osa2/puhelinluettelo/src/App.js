@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Person from './components/Person'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
@@ -16,14 +15,11 @@ const App = () => {
   const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {    
-    console.log('effect')    
-    axios
-      .get('http://localhost:3001/persons')      
-      .then(response => {        
-        console.log('promise fulfilled')        
-        setPersons(response.data)
-      })  
-  }, [])  
+    personService
+      .getAll().then(data => {
+        setPersons(data)
+      })
+  }, [])
 
 const personsToShow = persons.filter(person => person.name.toLowerCase().includes(showSearch.toLowerCase()))
 
