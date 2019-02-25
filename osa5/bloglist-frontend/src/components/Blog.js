@@ -22,24 +22,24 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
   if (!showDetails) {
     return (
       <div style={blogStyle} className='blogWithoutDetails'>
-        <div onClick={() => setShowDetails(!showDetails)} className='clickShowDetails'>
+        <div onClick={() => setShowDetails(true)} className='clickShowDetails'>
           {blog.title} {blog.author}
         </div>
       </div>
     )
-  } else {
-    return (
-      <div style={blogStyle} className='blogWithDetails'>
-        <div onClick={() => setShowDetails(showDetails)}>
-          <div>{blog.title} {blog.author}</div>
-          <div>{blog.url}</div>
-          <div>{blog.likes} likes <button onClick={() => addLike(blog.id)}>like</button></div>
-          <div>added by {blog.user.name}</div>
-          <div>{showRemoveButton(blog)}</div>
-        </div>
-      </div>
-    )
   }
+
+  return (
+    <div style={blogStyle} className='blogWithDetails'>
+      <div onClick={() => setShowDetails(false)}>
+        <div>{blog.title} {blog.author}</div>
+        <div>{blog.url}</div>
+        <div>{blog.likes} likes <button onClick={() => addLike(blog.id)}>like</button></div>
+        <div>added by {blog.user.name}</div>
+        <div>{showRemoveButton(blog)}</div>
+      </div>
+    </div>
+  )
 }
 
 
