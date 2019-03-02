@@ -8,19 +8,11 @@ const LoginForm = ({ handleLogin, username, password }) => {
       <form onSubmit={handleLogin}>
         <div>
           username
-          <input
-            type={username.type}
-            value={username.value}
-            onChange={username.onChange}
-          />
+          <input {...username}/>
         </div>
         <div>
           password
-          <input
-            type={password.type}
-            value={password.value}
-            onChange={password.onChange}
-          />
+          <input {...password} />
         </div>
         <button type="submit">log in</button>
       </form>
