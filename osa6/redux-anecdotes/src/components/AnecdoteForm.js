@@ -1,20 +1,21 @@
 import React from 'react';
 import { createAnecdote } from '../reducers/anecdoteReducer'
+import { setNotification } from '../reducers/notificationReducer'
+import { connect } from 'react-redux'
 
 const AnecdoteForm = (props) => {
-  const store = props.store
-
-  const addAnecdote = (event) => {
+  const addAnecdote = async (event) => {
     event.preventDefault()
-    store.dispatch(
-      createAnecdote(event.target.anecdote.value)    
-    )
+    const content = event.target.anecdote.value
     event.target.anecdote.value = ''
+    props.createAnecdote(content)
+
+    props.setNotification(`you created new anecdote ${content}`, 5)
+
   }
 
   return (
     <div>
-      <h2>Create new</h2>
       <form onSubmit={addAnecdote}>
         <div><input name="anecdote" /></div>
         <button type="submit">create</button>
@@ -23,4 +24,9 @@ const AnecdoteForm = (props) => {
   )
 }
 
-export default AnecdoteForm
+const mapDispatchToProps = {
+  createAnecdote,
+  setNotification
+}
+
+export default connect(null, mapDispatchToProps)(AnecdoteForm)
